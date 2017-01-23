@@ -6,13 +6,16 @@ import json
 
 temp2 = ""
 temp3 = ""
+address1 = ""
+address = ""
 
 def nyc():
     global temp2
+    global address1
     #url and paramaters
-    address = 'New York City'
+    address1 = input("Give me a city")
     url1 = "https://maps.googleapis.com/maps/api/geocode/json"
-    payload1 = {"key":"AIzaSyBoTmth2T-kwxGh9U5_6qIdUynQvjyildA", "address":str(address)}
+    payload1 = {"key":"AIzaSyBoTmth2T-kwxGh9U5_6qIdUynQvjyildA", "address":str(address1)}
     
     #make a request
     r1 = requests.get(url1, params=payload1)
@@ -40,8 +43,9 @@ def nyc():
 
 def bstn():
     global temp3
+    global address
     #url and paramaters
-    address = 'Boston'
+    address = input("Give me a city")
     url1 = "https://maps.googleapis.com/maps/api/geocode/json"
     payload1 = {"key":"AIzaSyBoTmth2T-kwxGh9U5_6qIdUynQvjyildA", "address":str(address)}
     
@@ -80,15 +84,15 @@ from bokeh.plotting import figure, show, output_file
 output_file('tempbar.html')
 #create and name file which will be created by the code
 
-p = figure(title = "Boston vs NYC Temperature", width=400, height=400)
+p = figure(title = address + "vs" + address1, width=400, height=400)
 #create title and size of graph
 
 p.vbar(x=[1.5], width=0.25, bottom=0,
-       top=[temp2], color="firebrick", legend = "NYC")
+       top=[temp2], color="firebrick", legend = address1)
 #create bar for NYC, using it's own color and data
 
 p.vbar(x=[1], width=0.25, bottom=0,
-       top=[temp3], color="blue", legend = "Boston")
+       top=[temp3], color="blue", legend = address)
 #create bar for Boston, using it's own color and data
 
 p.add_layout(Title(text="City", align="center"), "below")
